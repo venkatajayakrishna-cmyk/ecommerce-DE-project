@@ -37,7 +37,7 @@ with engine.connect() as connection:
         text("SELECT version()")
     ).scalar_one()
 
-with engine.connect() as connection:
+with engine.begin() as connection:
     connection.execute(
         text("CREATE SCHEMA IF NOT EXISTS raw")
     )
@@ -74,3 +74,5 @@ for csv_file in csv_files:
     )
 
 print("Ingestion Complete")
+
+engine.dispose()
